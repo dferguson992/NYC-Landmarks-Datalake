@@ -21,16 +21,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Implements the RequestHandler interface.
+ * This class and the handleCSVIngest method are designed to be the hook
+ * for an AWS Lambda function.
+ */
 public class CSVIngest implements RequestHandler<S3Event, String> {
     
+    /**
+     * The AWS Lambda environment variable for specifying the allocation of pre-processed files.
+     */
     private static final String DESTINATION_PREFIX = "DESTINATION_PREFIX";
     
     /**
-     * Parses the incoming raw data and prepares it for ETL pipeline operations.
+     * <p>Parses the incoming raw data and prepares it for ETL pipeline operations.</p>
      *
-     * @param bufferedReader
-     * @return
-     * @throws IOException
+     * @param bufferedReader <p>The BufferedReader object containing the raw file contents.</p>
+     * @return <p>A List of Strings modified in accordance with the methods pre-processing requirements.</p>
+     * @throws IOException <p>Thrown in case the BufferedReader.readLine() method throws an exception.</p>
      */
     static List<String> handleCSVIngest(BufferedReader bufferedReader) throws IOException {
         String line;
@@ -51,15 +59,22 @@ public class CSVIngest implements RequestHandler<S3Event, String> {
             }
             outputCollection.add(line);
         }
+        bufferedReader.close();
         return outputCollection;
     }
     
     /**
-     * This function is triggered by Lambda on an S3 file creation to the raw directory
-     * of the specified bucket for any csv file.
+     * <p>This function is triggered by Lambda on an S3 file creation.</p>
+     * <p>At the time of this writing, this function's intended use is to grab
+     * newly created files in an S3 bucket's <b>raw</b> directory with the <b>.csv</b>
+     * extension and modify the file's contents.  The modified contents are designed
+     * to standardize the data for ETL processing at a later date.  The processed
+     * files should be stored in the <b>processed/csv</b> directory, but this can be
+     * altered via a Lambda environment variable.</p>
+     * <p>This AWS Lambda function helps to isolate data within the lake.</p>
      *
-     * @param s3event
-     * @param context
+     * @param s3event <p>The S3 event which triggered this lambda function.</p>
+     * @param context <p>The AWS Lambda Context object for the current invocation.</p>
      * @return
      */
     @Override
@@ -101,6 +116,7 @@ public class CSVIngest implements RequestHandler<S3Event, String> {
             List<String> massagedOutput = null;
             try {
                 massagedOutput = handleCSVIngest(bufferedReader);
+                bufferedReader.close();
             } catch (IOException e) {
                 AWSXRay.getCurrentSegment().addException(e);
                 returnThis = e.getMessage();
