@@ -1,0 +1,17 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+
+# Ignore IntelliJ directory and files
+.idea
+*.iml
+*.ipr
+*.iws
+
+# Ignore output directory
+out
+
+# Ignore local configurations
+local.properties
