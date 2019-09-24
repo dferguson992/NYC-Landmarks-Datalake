@@ -47,18 +47,21 @@ public class CSVIngest implements RequestHandler<S3Event, String> {
             // Remove embedded quotes
             line = line.replaceAll("\"", "");
             
+            line = line.replaceAll("MULTIPOLYGON ", "").trim();
+            line = line.replaceAll("\\(\\(\\([0-9\\-\\.\\,\\ \\(\\)]+\\)\\)\\)", "");
+            
             // Remove commas and unnecessary text from Polygon blocks
-            if (line.contains("MULTIPOLYGON")) {
-                String polygon = line.substring(line.indexOf("MULTIPOLYGON"), line.indexOf(")))"));
-                polygon = polygon.replaceAll("MULTIPOLYGON", "");
-                polygon = polygon.replaceAll("\\(\\(\\(", "");
-                polygon = polygon.replaceAll("\\)\\)\\)", "").trim();
-                polygon = polygon.replaceAll(",\\ ", "::");
-                polygon = polygon.replaceAll("\\ ", ":");
-                polygon = polygon.replaceAll("\\( \\)", ":::");
-                line = line.replaceAll("MULTIPOLYGON ", "").trim();
-                line = line.replaceAll("\\(\\(\\([0-9\\-\\.\\,\\ \\(\\)]+\\)\\)\\)", polygon);
-            }
+//            if (line.contains("MULTIPOLYGON")) {
+//                String polygon = line.substring(line.indexOf("MULTIPOLYGON"), line.indexOf(")))"));
+//                polygon = polygon.replaceAll("MULTIPOLYGON", "");
+//                polygon = polygon.replaceAll("\\(\\(\\(", "");
+//                polygon = polygon.replaceAll("\\)\\)\\)", "").trim();
+//                polygon = polygon.replaceAll(",\\ ", "::");
+//                polygon = polygon.replaceAll("\\ ", ":");
+//                polygon = polygon.replaceAll("\\( \\)", ":::");
+//                line = line.replaceAll("MULTIPOLYGON ", "").trim();
+//                line = line.replaceAll("\\(\\(\\([0-9\\-\\.\\,\\ \\(\\)]+\\)\\)\\)", polygon);
+//            }
             outputCollection.add(line);
         }
         bufferedReader.close();

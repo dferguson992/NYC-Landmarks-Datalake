@@ -68,6 +68,7 @@ dependencies {
     compile "com.amazonaws:aws-xray-recorder-sdk-core"
     compile "com.amazonaws:aws-xray-recorder-sdk-aws-sdk"
     compile "com.amazonaws:aws-xray-recorder-sdk-aws-sdk-instrumentor"
+    compile 'cloud.localstack:localstack-utils:0.1.22'
     implementation 'junit:junit:4.12'
     implementation 'junit:junit:4.12'
 }
