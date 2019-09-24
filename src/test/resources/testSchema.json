@@ -1,0 +1,170 @@
+"schema": [
+{
+"key": "OBJECTID",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "the_geom",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "LP_NUMBER",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "BOROUGH",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "CHANGED_LP",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "RELATED_LP",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "CURRENT_",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "AREA_NAME",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "OTHER_NAME",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "EXTENSION",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "STATUS_OF_",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "LAST_ACTIO",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "BOUNDARY_N",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "DESIG_DATE",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "PUBLIC_HEA",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "CALEN_DATE",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "OTHER_HEAR",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "OTHER_NOTE",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "SURVEY_NAM",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "SURVEY_DAT",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "Shape_area",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "Shape_len",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "Borough1",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "LPNUM_TRIM",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "Report_URL",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "Image_URL",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "LM_Type",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+},
+{
+"key": "WebDes_Dte",
+"type": "string",
+"partition_key": "false",
+"comment": ""
+}
+]
