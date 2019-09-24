@@ -7,8 +7,7 @@ import com.amazonaws.services.lambda.runtime.events.S3Event;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.event.S3EventNotification;
-import com.amazonaws.services.s3.model.GetObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.*;
 import com.amazonaws.xray.AWSXRay;
 import com.amazonaws.xray.handlers.TracingHandler;
 
@@ -42,7 +41,7 @@ public class CSVIngest implements RequestHandler<S3Event, String> {
      */
     static List<String> handleCSVIngest(BufferedReader bufferedReader) throws IOException {
         String line;
-        List<String> outputCollection = new ArrayList<String>();
+        List<String> outputCollection = new ArrayList<>();
         while (null != (line = bufferedReader.readLine())) {
             // Remove embedded quotes
             line = line.replaceAll("\"", "");
@@ -108,11 +107,15 @@ public class CSVIngest implements RequestHandler<S3Event, String> {
             
             AWSXRay.beginSubsegment("Pull S3 data file into memory...");
             BufferedReader bufferedReader = null;
+            List<Tag> tagSet = null;
             try {
                 S3Object s3Object = s3Client.getObject(
                         new GetObjectRequest(srcBucket, srcKey));
                 bufferedReader = new BufferedReader(
                         new InputStreamReader(s3Object.getObjectContent()));
+                GetObjectTaggingResult taggingResult = s3Client.getObjectTagging(
+                        new GetObjectTaggingRequest(srcBucket, srcKey));
+                tagSet = taggingResult.getTagSet();b
             } finally {
                 AWSXRay.endSubsegment();
             }
