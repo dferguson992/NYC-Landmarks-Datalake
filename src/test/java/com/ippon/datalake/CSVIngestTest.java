@@ -34,7 +34,7 @@ public class CSVIngestTest {
     @Test
     public void testSchemaValidation() throws IOException, CSVIngest.SchemaValidationException {
         System.setProperty("AWS_REGION", "us-east-2");
-        CSVIngest ingest = new CSVIngest();
+        CSVIngest ingest = new çCSVIngest();
         S3Object testData = new S3Object();
         S3Object testSchema = new S3Object();
         testData.setObjectContent(new FileInputStream("testData.csv"));
